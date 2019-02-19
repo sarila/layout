@@ -13,20 +13,22 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title',200);
-            $table->string('keyword',150);
-            $table->string('description',250);
-            $table->string('heading',200);
-            $table->string('shortstory',200);
-            $table->string('fullstory',300);
-            $table->string('fimage',150);
-            $table->integer('category_id');
-            $table->integer('user_id');
-            $table->boolean('status');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('posts')) {
+            Schema::create('posts', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('title',200);
+                $table->string('keyword',150);
+                $table->string('description',250);
+                $table->string('heading',200);
+                $table->string('shortstory',200);
+                $table->string('fullstory',300);
+                $table->string('fimage',150);
+                $table->integer('category_id');
+                $table->integer('user_id');
+                $table->boolean('status');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
