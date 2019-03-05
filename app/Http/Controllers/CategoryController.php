@@ -68,7 +68,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('back.category.edit', compact('cats'));
+        $cats = category::find($id); 
+        return view('back.categorys.edit', compact('cats'));
     }
 
     /**
@@ -80,7 +81,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $cats = category::find($id);
+      $cats->name = $request->get('name');
+      $cats->description = $request->get('description');
+      $cats->status = $request->get('status');
+
+      return redirect('/catss')->with('success', 'Category has been updated');
+
     }
 
     /**
@@ -91,6 +98,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cats = Category::find($id);
+        $cats->delete();
+   
+        return redirect('/cats')->with('success', 'Category has been deleted Successfully');
     }
 }
